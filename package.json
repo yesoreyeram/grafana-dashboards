@@ -1,0 +1,20 @@
+{
+  "name": "grafana-azure-dashboards",
+  "version": "1.0.0",
+  "description": "Azure dashboards for Grafana",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yesoreyeram/grafana-azure-dashboards.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yesoreyeram/grafana-azure-dashboards/issues"
+  },
+  "homepage": "https://github.com/yesoreyeram/grafana-azure-dashboards#readme"
+}

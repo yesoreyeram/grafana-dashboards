@@ -1,0 +1,3337 @@
+{
+    "__inputs": [],
+    "__requires": [
+        {
+            "type": "grafana",
+            "id": "grafana",
+            "name": "Grafana",
+            "version": "6.1.6"
+        },
+        {
+            "type": "datasource",
+            "id": "grafana-azure-monitor-datasource",
+            "name": "Azure Monitor",
+            "version": "0.3.0"
+        },
+        {
+            "type": "panel",
+            "id": "graph",
+            "name": "Graph",
+            "version": ""
+        },
+        {
+            "type": "panel",
+            "id": "singlestat",
+            "name": "Singlestat",
+            "version": ""
+        }
+    ],
+    "_author": "Sriramajeyam Sugumaran",
+    "annotations": {
+        "list": [
+            {
+                "builtIn": 1,
+                "datasource": "-- Grafana --",
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "type": "dashboard"
+            }
+        ]
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 1,
+    "id": null,
+    "links": [],
+    "panels": [
+        {
+            "collapsed": false,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 0
+            },
+            "id": 23,
+            "panels": [],
+            "title": "",
+            "type": "row"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+                "#1F60C4",
+                "#3274D9",
+                "#1F60C4"
+            ],
+            "datasource": "$Subscription",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 2,
+                "w": 4,
+                "x": 0,
+                "y": 1
+            },
+            "id": 2,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.Batch/batchAccounts",
+                        "metricName": "CoreCount",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "auto",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Dedicated Core Count",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+                "#1F60C4",
+                "#3274D9",
+                "#1F60C4"
+            ],
+            "datasource": "$Subscription",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 2,
+                "w": 4,
+                "x": 4,
+                "y": 1
+            },
+            "id": 3,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.Batch/batchAccounts",
+                        "metricName": "TotalNodeCount",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "auto",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Dedicated Node Count",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+                "#1F60C4",
+                "#3274D9",
+                "#1F60C4"
+            ],
+            "datasource": "$Subscription",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 2,
+                "w": 4,
+                "x": 8,
+                "y": 1
+            },
+            "id": 6,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.Batch/batchAccounts",
+                        "metricName": "CreatingNodeCount",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "auto",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Creating Node Count",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+                "#1F60C4",
+                "#3274D9",
+                "#1F60C4"
+            ],
+            "datasource": "$Subscription",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 2,
+                "w": 4,
+                "x": 12,
+                "y": 1
+            },
+            "id": 7,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.Batch/batchAccounts",
+                        "metricName": "StartingNodeCount",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "auto",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Starting Node Count",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+                "#3274D9",
+                "#3274D9",
+                "#3274D9"
+            ],
+            "datasource": "$Subscription",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 2,
+                "w": 8,
+                "x": 16,
+                "y": 1
+            },
+            "id": 20,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.Batch/batchAccounts",
+                        "metricName": "TaskStartEvent",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "P1D",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "1,2",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Task Start in last 24h",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "0",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+                "#1F60C4",
+                "#3274D9",
+                "#1F60C4"
+            ],
+            "datasource": "$Subscription",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 2,
+                "w": 4,
+                "x": 0,
+                "y": 3
+            },
+            "id": 4,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.Batch/batchAccounts",
+                        "metricName": "LowPriorityCoreCount",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "auto",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Low Priority Core Count",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+                "#1F60C4",
+                "#3274D9",
+                "#1F60C4"
+            ],
+            "datasource": "$Subscription",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 2,
+                "w": 4,
+                "x": 4,
+                "y": 3
+            },
+            "id": 5,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.Batch/batchAccounts",
+                        "metricName": "TotalLowPriorityNodeCount",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "auto",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Low Priority Node Count",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+                "#1F60C4",
+                "#3274D9",
+                "#1F60C4"
+            ],
+            "datasource": "$Subscription",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 2,
+                "w": 4,
+                "x": 8,
+                "y": 3
+            },
+            "id": 10,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.Batch/batchAccounts",
+                        "metricName": "IdleNodeCount",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "auto",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Idle Node Count",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+                "#1F60C4",
+                "#3274D9",
+                "#1F60C4"
+            ],
+            "datasource": "$Subscription",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 2,
+                "w": 4,
+                "x": 12,
+                "y": 3
+            },
+            "id": 11,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.Batch/batchAccounts",
+                        "metricName": "OfflineNodeCount",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "auto",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Offline Node Count",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+                "#3274D9",
+                "#3274D9",
+                "#3274D9"
+            ],
+            "datasource": "$Subscription",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 2,
+                "w": 8,
+                "x": 16,
+                "y": 3
+            },
+            "id": 21,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.Batch/batchAccounts",
+                        "metricName": "TaskCompleteEvent",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "P1D",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "1,2",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Task Complete in last 24h",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "0",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+                "#1F60C4",
+                "#3274D9",
+                "#1F60C4"
+            ],
+            "datasource": "$Subscription",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 2,
+                "w": 4,
+                "x": 0,
+                "y": 5
+            },
+            "id": 14,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.Batch/batchAccounts",
+                        "metricName": "RunningNodeCount",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "auto",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Running Node Count",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+                "#1F60C4",
+                "#3274D9",
+                "#1F60C4"
+            ],
+            "datasource": "$Subscription",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 2,
+                "w": 4,
+                "x": 4,
+                "y": 5
+            },
+            "id": 15,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.Batch/batchAccounts",
+                        "metricName": "LeavingPoolNodeCount",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "auto",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Leaving Pool Node Count",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+                "#1F60C4",
+                "#3274D9",
+                "#1F60C4"
+            ],
+            "datasource": "$Subscription",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 2,
+                "w": 4,
+                "x": 8,
+                "y": 5
+            },
+            "id": 16,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.Batch/batchAccounts",
+                        "metricName": "UnusableNodeCount",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "auto",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Unusable Node Count",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+                "#1F60C4",
+                "#3274D9",
+                "#1F60C4"
+            ],
+            "datasource": "$Subscription",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 2,
+                "w": 4,
+                "x": 12,
+                "y": 5
+            },
+            "id": 17,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.Batch/batchAccounts",
+                        "metricName": "PreemptedNodeCount",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "auto",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Preempted Node Count",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+                "#37872D",
+                "#FF780A",
+                "#C4162A"
+            ],
+            "datasource": "$Subscription",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 2,
+                "w": 8,
+                "x": 16,
+                "y": 5
+            },
+            "id": 19,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.Batch/batchAccounts",
+                        "metricName": "TaskFailEvent",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "P1D",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "1,2",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Task Fail  in last 24h",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "0",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+                "#1F60C4",
+                "#3274D9",
+                "#1F60C4"
+            ],
+            "datasource": "$Subscription",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 2,
+                "w": 4,
+                "x": 0,
+                "y": 7
+            },
+            "id": 8,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.Batch/batchAccounts",
+                        "metricName": "WaitingForStartTaskNodeCount",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "auto",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Waiting For Start Task Node Count",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+                "#1F60C4",
+                "#3274D9",
+                "#1F60C4"
+            ],
+            "datasource": "$Subscription",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 2,
+                "w": 4,
+                "x": 4,
+                "y": 7
+            },
+            "id": 12,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.Batch/batchAccounts",
+                        "metricName": "RebootingNodeCount",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "auto",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Rebooting Node Count",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+                "#1F60C4",
+                "#3274D9",
+                "#1F60C4"
+            ],
+            "datasource": "$Subscription",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 2,
+                "w": 4,
+                "x": 8,
+                "y": 7
+            },
+            "id": 9,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.Batch/batchAccounts",
+                        "metricName": "StartTaskFailedNodeCount",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "auto",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Start Task Failed Node Count",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+                "#1F60C4",
+                "#3274D9",
+                "#1F60C4"
+            ],
+            "datasource": "$Subscription",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 2,
+                "w": 4,
+                "x": 12,
+                "y": 7
+            },
+            "id": 13,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.Batch/batchAccounts",
+                        "metricName": "ReimagingNodeCount",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "auto",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Reimaging Node Count",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "aliasColors": {},
+            "bars": true,
+            "cacheTimeout": null,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "$Subscription",
+            "fill": 1,
+            "gridPos": {
+                "h": 6,
+                "w": 24,
+                "x": 0,
+                "y": 9
+            },
+            "id": 18,
+            "legend": {
+                "avg": false,
+                "current": false,
+                "max": false,
+                "min": false,
+                "show": true,
+                "total": false,
+                "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null as zero",
+            "percentage": false,
+            "pointradius": 2,
+            "points": true,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "alias": "Task Start Events",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.Batch/batchAccounts",
+                        "metricName": "TaskStartEvent",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "auto",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                },
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "alias": "Task Complete Events",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.Batch/batchAccounts",
+                        "metricName": "TaskCompleteEvent",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "auto",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "B"
+                },
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "alias": "Task Fail Events",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.Batch/batchAccounts",
+                        "metricName": "TaskFailEvent",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "auto",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "C"
+                }
+            ],
+            "thresholds": [],
+            "timeFrom": "7d",
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Number of Task Events",
+            "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+                "buckets": null,
+                "mode": "time",
+                "name": null,
+                "show": true,
+                "values": []
+            },
+            "yaxes": [
+                {
+                    "format": "short",
+                    "label": null,
+                    "logBase": 1,
+                    "max": null,
+                    "min": null,
+                    "show": true
+                },
+                {
+                    "format": "short",
+                    "label": null,
+                    "logBase": 1,
+                    "max": null,
+                    "min": null,
+                    "show": true
+                }
+            ],
+            "yaxis": {
+                "align": false,
+                "alignLevel": null
+            }
+        }
+    ],
+    "refresh": "1m",
+    "schemaVersion": 18,
+    "style": "dark",
+    "tags": [
+        "azure",
+        "templates"
+    ],
+    "templating": {
+        "list": [
+            {
+                "current": {},
+                "hide": 0,
+                "includeAll": false,
+                "label": null,
+                "multi": false,
+                "name": "Subscription",
+                "options": [],
+                "query": "grafana-azure-monitor-datasource",
+                "refresh": 1,
+                "regex": "",
+                "skipUrlSync": false,
+                "type": "datasource"
+            },
+            {
+                "allValue": null,
+                "current": {},
+                "datasource": "$Subscription",
+                "definition": "ResourceGroups()",
+                "hide": 0,
+                "includeAll": false,
+                "label": "Resource Group",
+                "multi": false,
+                "name": "ResourceGroup",
+                "options": [],
+                "query": "ResourceGroups()",
+                "refresh": 1,
+                "regex": "",
+                "skipUrlSync": false,
+                "sort": 0,
+                "tagValuesQuery": "",
+                "tags": [],
+                "tagsQuery": "",
+                "type": "query",
+                "useTags": false
+            },
+            {
+                "allValue": null,
+                "current": {},
+                "datasource": "$Subscription",
+                "definition": "ResourceNames($ResourceGroup,Microsoft.Batch/batchAccounts)",
+                "hide": 0,
+                "includeAll": false,
+                "label": "Batch Account Name",
+                "multi": false,
+                "name": "ResourceName",
+                "options": [],
+                "query": "ResourceNames($ResourceGroup,Microsoft.Batch/batchAccounts)",
+                "refresh": 1,
+                "regex": "",
+                "skipUrlSync": false,
+                "sort": 0,
+                "tagValuesQuery": "",
+                "tags": [],
+                "tagsQuery": "",
+                "type": "query",
+                "useTags": false
+            }
+        ]
+    },
+    "time": {
+        "from": "now-2d",
+        "to": "now"
+    },
+    "timepicker": {
+        "refresh_intervals": [
+            "1m",
+            "5m",
+            "15m",
+            "30m",
+            "1h",
+            "2h",
+            "1d"
+        ],
+        "time_options": [
+            "5m",
+            "15m",
+            "1h",
+            "6h",
+            "12h",
+            "24h",
+            "2d",
+            "7d",
+            "30d"
+        ]
+    },
+    "timezone": "",
+    "title": "Azure Batch Accounts",
+    "uid": "azure-batch-accounts"
+}

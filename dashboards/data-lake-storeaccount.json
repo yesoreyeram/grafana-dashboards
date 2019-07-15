@@ -1,0 +1,2179 @@
+{
+    "__inputs": [],
+    "__requires": [
+        {
+            "type": "grafana",
+            "id": "grafana",
+            "name": "Grafana",
+            "version": "6.1.6"
+        },
+        {
+            "type": "datasource",
+            "id": "grafana-azure-monitor-datasource",
+            "name": "Azure Monitor",
+            "version": "0.3.0"
+        },
+        {
+            "type": "panel",
+            "id": "graph",
+            "name": "Graph",
+            "version": ""
+        },
+        {
+            "type": "panel",
+            "id": "singlestat",
+            "name": "Singlestat",
+            "version": ""
+        }
+    ],
+    "_author": "Sriramajeyam Sugumaran",
+    "annotations": {
+        "list": [
+            {
+                "builtIn": 1,
+                "datasource": "-- Grafana --",
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "type": "dashboard"
+            }
+        ]
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": null,
+    "links":  [
+        {
+            "icon": "doc",
+            "tags": [],
+            "targetBlank": true,
+            "title": "Metrics Definitions",
+            "tooltip": "",
+            "type": "link",
+            "url": "https://docs.microsoft.com/en-in/azure/azure-monitor/platform/metrics-supported#microsoftdatalakestoreaccounts"
+        }
+    ],
+    "panels": [
+        {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": false,
+            "colors": [
+                "#299c46",
+                "rgba(237, 129, 40, 0.89)",
+                "#d44a3a"
+            ],
+            "datasource": "$Subscription",
+            "format": "decbytes",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 2,
+                "w": 24,
+                "x": 0,
+                "y": 0
+            },
+            "hideTimeOverride": true,
+            "id": 14,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series",
+                        "workspace": "f08dd684-9831-43db-b782-482cbff7a88c"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Maximum",
+                        "alias": "Total amount of data stored in the account.",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.DataLakeStore/accounts",
+                        "metricName": "TotalStorage",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "PT15M",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Total amount of data stored in the account",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": false,
+            "colors": [
+                "#299c46",
+                "rgba(237, 129, 40, 0.89)",
+                "#d44a3a"
+            ],
+            "datasource": "$Subscription",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 5,
+                "x": 0,
+                "y": 2
+            },
+            "hideTimeOverride": true,
+            "id": 17,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": true
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series",
+                        "workspace": "f08dd684-9831-43db-b782-482cbff7a88c"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "alias": "Read requests / min",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.DataLakeStore/accounts",
+                        "metricName": "ReadRequests",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "PT1M",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Read requests / min",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": false,
+            "colors": [
+                "#299c46",
+                "rgba(237, 129, 40, 0.89)",
+                "#d44a3a"
+            ],
+            "datasource": "$Subscription",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 5,
+                "x": 5,
+                "y": 2
+            },
+            "hideTimeOverride": true,
+            "id": 20,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": true
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series",
+                        "workspace": "f08dd684-9831-43db-b782-482cbff7a88c"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "alias": "Write requests / min",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.DataLakeStore/accounts",
+                        "metricName": "WriteRequests",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "PT1M",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Write requests / min",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": false,
+            "colors": [
+                "#299c46",
+                "rgba(237, 129, 40, 0.89)",
+                "#d44a3a"
+            ],
+            "datasource": "$Subscription",
+            "format": "decbytes",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 7,
+                "x": 10,
+                "y": 2
+            },
+            "hideTimeOverride": true,
+            "id": 15,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": true
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series",
+                        "workspace": "f08dd684-9831-43db-b782-482cbff7a88c"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "alias": "Total amount of data written to the account ( last 5 mins )",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.DataLakeStore/accounts",
+                        "metricName": "DataWritten",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "PT5M",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Total amount of data written to the account ( last 5 mins )",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": false,
+            "colors": [
+                "#299c46",
+                "rgba(237, 129, 40, 0.89)",
+                "#d44a3a"
+            ],
+            "datasource": "$Subscription",
+            "format": "decbytes",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 7,
+                "x": 17,
+                "y": 2
+            },
+            "hideTimeOverride": true,
+            "id": 16,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": true
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series",
+                        "workspace": "f08dd684-9831-43db-b782-482cbff7a88c"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "alias": "Total amount of data read from the account ( last 5 mins )",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.DataLakeStore/accounts",
+                        "metricName": "DataRead",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "PT5M",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Total amount of data read from the account ( last 5 mins )",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "current"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": false,
+            "colors": [
+                "#299c46",
+                "rgba(237, 129, 40, 0.89)",
+                "#d44a3a"
+            ],
+            "datasource": "$Subscription",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 5,
+                "x": 0,
+                "y": 5
+            },
+            "hideTimeOverride": true,
+            "id": 21,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": true
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series",
+                        "workspace": "f08dd684-9831-43db-b782-482cbff7a88c"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "alias": "Avg Read requests",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.DataLakeStore/accounts",
+                        "metricName": "ReadRequests",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "PT1M",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Avg Read requests",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "avg"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": false,
+            "colors": [
+                "#299c46",
+                "rgba(237, 129, 40, 0.89)",
+                "#d44a3a"
+            ],
+            "datasource": "$Subscription",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 5,
+                "x": 5,
+                "y": 5
+            },
+            "hideTimeOverride": true,
+            "id": 22,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": true
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series",
+                        "workspace": "f08dd684-9831-43db-b782-482cbff7a88c"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "alias": "Avg Write requests",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.DataLakeStore/accounts",
+                        "metricName": "WriteRequests",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "PT1M",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Avg Write requests",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "avg"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": false,
+            "colors": [
+                "#299c46",
+                "rgba(237, 129, 40, 0.89)",
+                "#d44a3a"
+            ],
+            "datasource": "$Subscription",
+            "format": "decbytes",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 7,
+                "x": 10,
+                "y": 5
+            },
+            "hideTimeOverride": true,
+            "id": 18,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": true
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series",
+                        "workspace": "f08dd684-9831-43db-b782-482cbff7a88c"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "alias": "Average amount of data written to the account ( every 5 mins )",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.DataLakeStore/accounts",
+                        "metricName": "DataWritten",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "PT5M",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Average amount of data written to the account ( every 5 mins )",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "avg"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": false,
+            "colors": [
+                "#299c46",
+                "rgba(237, 129, 40, 0.89)",
+                "#d44a3a"
+            ],
+            "datasource": "$Subscription",
+            "format": "decbytes",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 7,
+                "x": 17,
+                "y": 5
+            },
+            "hideTimeOverride": true,
+            "id": 19,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": false,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": true
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series",
+                        "workspace": "f08dd684-9831-43db-b782-482cbff7a88c"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "alias": "Average amount of data read from the account ( every 5 mins )",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.DataLakeStore/accounts",
+                        "metricName": "DataRead",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "PT5M",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Average amount of data read from the account ( every 5 mins )",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "avg"
+        },
+        {
+            "aliasColors": {},
+            "bars": false,
+            "cacheTimeout": null,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "$Subscription",
+            "decimals": 0,
+            "fill": 0,
+            "gridPos": {
+                "h": 5,
+                "w": 12,
+                "x": 0,
+                "y": 8
+            },
+            "hideTimeOverride": true,
+            "id": 23,
+            "legend": {
+                "alignAsTable": true,
+                "avg": true,
+                "current": true,
+                "max": true,
+                "min": true,
+                "show": true,
+                "total": true,
+                "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 0.5,
+            "points": true,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": true,
+            "steppedLine": false,
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series",
+                        "workspace": "f08dd684-9831-43db-b782-482cbff7a88c"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "alias": "Read requests / min",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.DataLakeStore/accounts",
+                        "metricName": "ReadRequests",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "PT1M",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Read requests / min",
+            "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+                "buckets": null,
+                "mode": "time",
+                "name": null,
+                "show": true,
+                "values": []
+            },
+            "yaxes": [
+                {
+                    "format": "none",
+                    "label": null,
+                    "logBase": 1,
+                    "max": null,
+                    "min": null,
+                    "show": true
+                },
+                {
+                    "format": "short",
+                    "label": null,
+                    "logBase": 1,
+                    "max": null,
+                    "min": null,
+                    "show": true
+                }
+            ],
+            "yaxis": {
+                "align": false,
+                "alignLevel": null
+            }
+        },
+        {
+            "aliasColors": {},
+            "bars": false,
+            "cacheTimeout": null,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "$Subscription",
+            "fill": 0,
+            "gridPos": {
+                "h": 5,
+                "w": 12,
+                "x": 12,
+                "y": 8
+            },
+            "hideTimeOverride": true,
+            "id": 24,
+            "legend": {
+                "alignAsTable": true,
+                "avg": true,
+                "current": true,
+                "max": true,
+                "min": true,
+                "show": true,
+                "total": true,
+                "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 0.5,
+            "points": true,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": true,
+            "steppedLine": false,
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series",
+                        "workspace": "f08dd684-9831-43db-b782-482cbff7a88c"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "alias": "Write requests / min",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.DataLakeStore/accounts",
+                        "metricName": "WriteRequests",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "PT1M",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "B"
+                }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Write requests / min",
+            "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+                "buckets": null,
+                "mode": "time",
+                "name": null,
+                "show": true,
+                "values": []
+            },
+            "yaxes": [
+                {
+                    "format": "none",
+                    "label": null,
+                    "logBase": 1,
+                    "max": null,
+                    "min": null,
+                    "show": true
+                },
+                {
+                    "format": "short",
+                    "label": null,
+                    "logBase": 1,
+                    "max": null,
+                    "min": null,
+                    "show": true
+                }
+            ],
+            "yaxis": {
+                "align": false,
+                "alignLevel": null
+            }
+        },
+        {
+            "aliasColors": {},
+            "bars": false,
+            "cacheTimeout": null,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "$Subscription",
+            "decimals": 2,
+            "fill": 0,
+            "gridPos": {
+                "h": 5,
+                "w": 12,
+                "x": 0,
+                "y": 13
+            },
+            "hideTimeOverride": true,
+            "id": 25,
+            "legend": {
+                "alignAsTable": true,
+                "avg": true,
+                "current": true,
+                "max": true,
+                "min": true,
+                "show": true,
+                "total": true,
+                "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 0.5,
+            "points": true,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": true,
+            "steppedLine": false,
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series",
+                        "workspace": "f08dd684-9831-43db-b782-482cbff7a88c"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "alias": "Data Read / min",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.DataLakeStore/accounts",
+                        "metricName": "DataRead",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "PT1M",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Data Read / min",
+            "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+                "buckets": null,
+                "mode": "time",
+                "name": null,
+                "show": true,
+                "values": []
+            },
+            "yaxes": [
+                {
+                    "format": "decbytes",
+                    "label": null,
+                    "logBase": 1,
+                    "max": null,
+                    "min": null,
+                    "show": true
+                },
+                {
+                    "format": "short",
+                    "label": null,
+                    "logBase": 1,
+                    "max": null,
+                    "min": null,
+                    "show": true
+                }
+            ],
+            "yaxis": {
+                "align": false,
+                "alignLevel": null
+            }
+        },
+        {
+            "aliasColors": {},
+            "bars": false,
+            "cacheTimeout": null,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "$Subscription",
+            "decimals": 2,
+            "fill": 0,
+            "gridPos": {
+                "h": 5,
+                "w": 12,
+                "x": 12,
+                "y": 13
+            },
+            "hideTimeOverride": true,
+            "id": 26,
+            "legend": {
+                "alignAsTable": true,
+                "avg": true,
+                "current": true,
+                "max": true,
+                "min": true,
+                "show": true,
+                "total": true,
+                "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 0.5,
+            "points": true,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": true,
+            "steppedLine": false,
+            "targets": [
+                {
+                    "appInsights": {
+                        "groupBy": "none",
+                        "metricName": "select",
+                        "rawQuery": false,
+                        "rawQueryString": "",
+                        "spliton": "",
+                        "timeGrainType": "auto",
+                        "xaxis": "timestamp",
+                        "yaxis": ""
+                    },
+                    "azureLogAnalytics": {
+                        "query": "//change this example to create your own time series query\n<table name>                                                              //the table to query (e.g. Usage, Heartbeat, Perf)\n| where $__timeFilter(TimeGenerated)                                      //this is a macro used to show the full chart’s time range, choose the datetime column here\n| summarize count() by <group by column>, bin(TimeGenerated, $__interval) //change “group by column” to a column in your table, such as “Computer”. The $__interval macro is used to auto-select the time grain. Can also use 1h, 5m etc.\n| order by TimeGenerated asc",
+                        "resultFormat": "time_series",
+                        "workspace": "f08dd684-9831-43db-b782-482cbff7a88c"
+                    },
+                    "azureMonitor": {
+                        "aggOptions": [
+                            "None",
+                            "Average",
+                            "Minimum",
+                            "Maximum",
+                            "Total",
+                            "Count"
+                        ],
+                        "aggregation": "Total",
+                        "alias": "Data Written / min",
+                        "dimension": "",
+                        "dimensionFilter": "*",
+                        "dimensions": [],
+                        "metricDefinition": "Microsoft.DataLakeStore/accounts",
+                        "metricName": "DataWritten",
+                        "resourceGroup": "$ResourceGroup",
+                        "resourceName": "$ResourceName",
+                        "timeGrain": "PT1M",
+                        "timeGrains": [
+                            {
+                                "text": "auto",
+                                "value": "auto"
+                            },
+                            {
+                                "text": "1 minute",
+                                "value": "PT1M"
+                            },
+                            {
+                                "text": "5 minutes",
+                                "value": "PT5M"
+                            },
+                            {
+                                "text": "15 minutes",
+                                "value": "PT15M"
+                            },
+                            {
+                                "text": "30 minutes",
+                                "value": "PT30M"
+                            },
+                            {
+                                "text": "1 hour",
+                                "value": "PT1H"
+                            },
+                            {
+                                "text": "6 hours",
+                                "value": "PT6H"
+                            },
+                            {
+                                "text": "12 hours",
+                                "value": "PT12H"
+                            },
+                            {
+                                "text": "1 day",
+                                "value": "P1D"
+                            }
+                        ]
+                    },
+                    "queryType": "Azure Monitor",
+                    "refId": "A"
+                }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Data Written / min",
+            "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+                "buckets": null,
+                "mode": "time",
+                "name": null,
+                "show": true,
+                "values": []
+            },
+            "yaxes": [
+                {
+                    "format": "decbytes",
+                    "label": null,
+                    "logBase": 1,
+                    "max": null,
+                    "min": null,
+                    "show": true
+                },
+                {
+                    "format": "short",
+                    "label": null,
+                    "logBase": 1,
+                    "max": null,
+                    "min": null,
+                    "show": true
+                }
+            ],
+            "yaxis": {
+                "align": false,
+                "alignLevel": null
+            }
+        }
+    ],
+    "refresh": "1m",
+    "schemaVersion": 18,
+    "style": "dark",
+    "tags": [
+        "azure",
+        "templates"
+    ],
+    "templating": {
+        "list": [
+            {
+                "current": {},
+                "hide": 0,
+                "includeAll": false,
+                "label": null,
+                "multi": false,
+                "name": "Subscription",
+                "options": [],
+                "query": "grafana-azure-monitor-datasource",
+                "refresh": 1,
+                "regex": "",
+                "skipUrlSync": false,
+                "type": "datasource"
+            },
+            {
+                "allValue": null,
+                "current": {},
+                "datasource": "$Subscription",
+                "definition": "ResourceGroups()",
+                "hide": 0,
+                "includeAll": false,
+                "label": "Resource Group",
+                "multi": false,
+                "name": "ResourceGroup",
+                "options": [],
+                "query": "ResourceGroups()",
+                "refresh": 1,
+                "regex": "",
+                "skipUrlSync": false,
+                "sort": 0,
+                "tagValuesQuery": "",
+                "tags": [],
+                "tagsQuery": "",
+                "type": "query",
+                "useTags": false
+            },
+            {
+                "allValue": null,
+                "current": {},
+                "datasource": "$Subscription",
+                "definition": "ResourceNames($ResourceGroup,Microsoft.DataLakeStore/accounts)",
+                "hide": 0,
+                "includeAll": false,
+                "label": "Resource Name",
+                "multi": false,
+                "name": "ResourceName",
+                "options": [],
+                "query": "ResourceNames($ResourceGroup,Microsoft.DataLakeStore/accounts)",
+                "refresh": 1,
+                "regex": "",
+                "skipUrlSync": false,
+                "sort": 0,
+                "tagValuesQuery": "",
+                "tags": [],
+                "tagsQuery": "",
+                "type": "query",
+                "useTags": false
+            }
+        ]
+    },
+    "time": {
+        "from": "now-6h",
+        "to": "now"
+    },
+    "timepicker": {
+        "nowDelay": "1m",
+        "refresh_intervals": [
+            "5m",
+            "15m",
+            "30m",
+            "1h",
+            "2h",
+            "1d"
+        ],
+        "time_options": [
+            "5m",
+            "15m",
+            "1h",
+            "6h",
+            "12h",
+            "24h",
+            "2d",
+            "7d",
+            "30d"
+        ]
+    },
+    "timezone": "",
+    "title": "Azure Data Lake Store Account",
+    "uid": "data-lake-store-accounts"
+}
